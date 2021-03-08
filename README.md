@@ -11,7 +11,7 @@ This is the repo for the HvA Web Development Minor course: Progressive web apps
 * [Sources](#Sources)
 
 ## Live Demo
-Visit the live demo [Here](https://samslotemaker.github.io/web-app-from-scratch-2021/)
+Visit the live demo [Here](https://gamepicker-pwa.herokuapp.com/)
 
 ## :book:Description
 A concept web app, to learn the difference between client- and serverside rendering
