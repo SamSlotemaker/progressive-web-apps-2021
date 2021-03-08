@@ -27,8 +27,9 @@ app.get('/', async (req, res) => {
     const gameList = gameData.results
     const platformList = platformData.results
 
-    //check search
+
     let filteredGameList
+    //check search
     if (req.query.search) {
         filteredGameList = gameList.filter(item => {
             return item.name.toLowerCase().includes(req.query.search)
@@ -37,25 +38,17 @@ app.get('/', async (req, res) => {
     else {
         filteredGameList = gameList
     }
+    //check genre filter
+    if (req.query.genres) {
+        filteredGameList = checkFiltering(gameList, req.query.genres)
+    }
+    else {
+        filteredGameList = gameList
+    }
 
     // render page with the lists
     res.render('overview', { games: filteredGameList, platforms: platformList, genres: genres })
 })
-
-app.post('/filter', async (req, res) => {
-    const gameData = await getData(subjectGames, pageQuery)
-    const platformData = await getData(subjectPlatforms, ordering)
-    const genres = filterGenres(gameData)
-
-    //extract results from data
-    const gameList = gameData.results
-    const platformList = platformData.results
-
-    //filter list
-    const filteredGameList = checkFiltering(gameList, req.body.genres)
-    res.render('overview', { games: filteredGameList, platforms: platformList, genres: genres })
-})
-
 
 app.get('/games/:id', async (req, res) => {
     //get gamedata
