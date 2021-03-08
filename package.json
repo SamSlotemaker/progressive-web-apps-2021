@@ -18,6 +18,9 @@
     "url": "https://github.com/SamSlotemaker/progressive-web-apps-2021/issues"
   },
   "homepage": "https://github.com/SamSlotemaker/progressive-web-apps-2021#readme",
+  "engines": {
+    "node": "14.16.0"
+  },
   "dependencies": {
     "ejs": "^3.1.6",
     "express": "^4.17.1",

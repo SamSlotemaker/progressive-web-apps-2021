@@ -14,7 +14,7 @@ This is the repo for the HvA Web Development Minor course: Progressive web apps
 Visit the live demo [Here](https://samslotemaker.github.io/web-app-from-scratch-2021/)
 
 ## :book:Description
-In Web App From Scratch we will learn to create a digital weg app using and external API, with vanilla html, css and javascript. 
+A concept web app, to learn the difference between client- and serverside rendering
 
 ## :pencil:Concept
 Collecting certain games and platforms from the external API, then showing them in an overview and detailpage, where users are able to collect extra information on popular games. 
