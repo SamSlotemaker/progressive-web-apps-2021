@@ -1,0 +1,29 @@
+{
+  "name": "progressive-web-apps-2021",
+  "version": "1.0.0",
+  "description": "progressive web app for the web development course",
+  "main": "index.js",
+  "scripts": {
+    "start":"node index.js",
+    "dev": "nodemon index.js",
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SamSlotemaker/progressive-web-apps-2021.git"
+  },
+  "author": "Sam Slotemaker",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SamSlotemaker/progressive-web-apps-2021/issues"
+  },
+  "homepage": "https://github.com/SamSlotemaker/progressive-web-apps-2021#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
