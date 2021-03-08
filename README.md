@@ -45,7 +45,14 @@ You need to have [GIT](https://git-scm.com/downloads) installed to clone this re
 
 ### Installing
 To view the project on your own device, you can clone the repository
-```git clone https://github.com/SamSlotemaker/web-app-from-scratch-2021.git```
+#### Clone localy
+```git clone https://github.com/SamSlotemaker/progressive-web-apps-2021.git```
+
+#### Install package 
+```npm install```
+
+#### start server
+```npm start```
 
 ## :book:External Data
 Data will be collected from an open API called [rawG.io](https://rawg.io/apidocs), a large videogame library with over 500.000+ games, where you can collect deetailed info about every single one.

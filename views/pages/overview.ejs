@@ -14,11 +14,11 @@
         </section>
         <section class="games-section">
             <h2>Games</h2>
-            <form>
-                <input name='genres' value="all" id="all" type="radio" checked />
+            <form method="POST" action="/filter">
+                <input name='genres' value="all" id="all" type="radio" />
                 <label for="all">All</label>
                 <% genres.forEach(genre => { %>
-                <input name='genres' value="<%= genre %>" id=" <%= genre %>" type="radio" />
+                <input name='genres' value="<%= genre %>" id="<%= genre %>" type="radio" />
                 <label for="<%= genre %>"><%= genre %></label>
                 <% }) %>
             </form>

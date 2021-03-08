@@ -6,6 +6,7 @@ const port = process.env.PORT || 3000;
 const path = require("path");
 
 app.use(express.static(path.join(__dirname, "static/public")));
+app.use(express.urlencoded());
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views/pages"));
 
@@ -15,7 +16,6 @@ const pageSize = '?page_size=20'
 const page = '&page=1'
 const pageQuery = pageSize + page
 const ordering = '?ordering=-games_count'
-
 
 app.get('/', async (req, res) => {
     //get data
@@ -30,6 +30,20 @@ app.get('/', async (req, res) => {
     res.render('overview', { games: gameList, platforms: platformList, genres: genres })
 })
 
+app.post('/filter', async (req, res) => {
+    const gameData = await getData(subjectGames, pageQuery)
+    const platformData = await getData(subjectPlatforms, ordering)
+    const genres = filterGenres(gameData)
+
+    //extract results from data
+    const gameList = gameData.results
+    const platformList = platformData.results
+
+    //filter list
+    const filteredGameList = checkFiltering(gameList, req.body.genres)
+    res.render('overview', { games: filteredGameList, platforms: platformList, genres: genres })
+})
+
 app.get('/games/:id', async (req, res) => {
     //get gamedata
     const game = await getData('games/' + req.params.id)
@@ -37,10 +51,18 @@ app.get('/games/:id', async (req, res) => {
     res.render('detail', { game: game })
 })
 
+//start express server
 app.listen(port, () => {
     console.log(`app listening on port: ${port}`)
 })
 
-
-
-
+function checkFiltering(array, filter) {
+    if (filter === 'all') {
+        return array
+    }
+    else {
+        return array.filter(game => {
+            return game.genres[0].name === filter
+        })
+    }
+}
