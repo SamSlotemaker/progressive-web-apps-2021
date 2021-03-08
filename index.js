@@ -36,15 +36,15 @@ app.get('/', async (req, res) => {
         })
     }
     else {
-        filteredGameList = gameList
+        if (req.query.genres) {
+            filteredGameList = checkFiltering(gameList, req.query.genres)
+        }
+        else {
+            filteredGameList = gameList
+        }
     }
     //check genre filter
-    if (req.query.genres) {
-        filteredGameList = checkFiltering(gameList, req.query.genres)
-    }
-    else {
-        filteredGameList = gameList
-    }
+
 
     // render page with the lists
     res.render('overview', { games: filteredGameList, platforms: platformList, genres: genres })
@@ -71,12 +71,4 @@ function checkFiltering(array, filter) {
             return game.genres[0].name === filter
         })
     }
-}
-
-function handleSearchForm(input, data) {
-    let dataList = data.results
-    const filteredData = dataList.filter(item => {
-        return item.name.toLowerCase().includes(input.value.toLowerCase())
-    })
-    data.results = filteredData
 }
