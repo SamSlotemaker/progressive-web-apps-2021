@@ -110,6 +110,16 @@ main>section:nth-of-type(2) form>input:checked+label {
     margin: auto;
 }
 
+.search-query {
+    grid-column: 1 / -1;
+}
+
+.search-query>strong {
+    color: orange;
+    font-size: 1.2em;
+}
+
+
 .game {
     position: relative;
     height: 40vh;

@@ -15,14 +15,29 @@
         <section class="games-section">
             <h2>Games</h2>
             <form method="GET" action="/">
+                <!-- check button state to see if they need to be checked -->
+                <% if ('all' === filteredGenre) { %>
+                <input name='genres' value="all" id="all" type="radio" checked />
+                <% } else { %>
                 <input name='genres' value="all" id="all" type="radio" />
+                <% } %>
                 <label for="all">All</label>
+
                 <% genres.forEach(genre => { %>
+                <% if (genre === filteredGenre) { %>
+                <input name='genres' value="<%= genre %>" id="<%= genre %>" type="radio" checked />
+                <% } else { %>
                 <input name='genres' value="<%= genre %>" id="<%= genre %>" type="radio" />
+                <% } %>
                 <label for="<%= genre %>"><%= genre %></label>
                 <% }) %>
             </form>
             <div class="games">
+
+                <% if (searchQuery) { %>
+                <p class="search-query">You have searched for: <strong><%= searchQuery %></strong></p>
+                <% } %>
+
                 <% games.forEach(game => { %>
                 <article class="game">
                     <a href='games/<%= game.id %>'>
