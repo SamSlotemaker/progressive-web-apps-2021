@@ -15,6 +15,9 @@ app.set("views", path.join(__dirname, "views/pages"));
 //get routes 
 app.get('/', renderOverviewPage)
 app.get('/games/:id', renderDetailPage)
+app.get('*', (req, res) => {
+    res.render('error')
+})
 
 //start express server
 app.listen(port, () => {

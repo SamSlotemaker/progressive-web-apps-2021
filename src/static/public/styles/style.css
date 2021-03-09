@@ -115,8 +115,17 @@ main>section:nth-of-type(2) form>input:checked+label {
 }
 
 .search-query>strong {
-    color: orange;
+    color: var(--orange);
     font-size: 1.2em;
+}
+
+.no-results-message {
+    font-size: 4em;
+    grid-column: 1 / -1;
+}
+
+.no-results-message>span {
+    color: var(--orange);
 }
 
 .game {
@@ -306,4 +315,25 @@ form input {
     position: absolute;
     top: 3em;
     right: 3em;
+}
+
+/* 404 ERROR PAGE */
+.error {}
+
+.error h1 {
+    max-width: 100000em;
+    margin-bottom: 0;
+}
+
+.error p {
+    margin-top: 3em;
+    font-size: 1.3em;
+}
+
+.error p a {
+    display: inline-block;
+    padding: .5em 1em;
+    background-color: var(--orange);
+    color: white;
+    margin: 1em;
 }

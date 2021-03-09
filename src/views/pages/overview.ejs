@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="eng">
 <%- include('../partials/head.ejs'); %>
 
 <body>
@@ -38,6 +40,10 @@
                 <p class="search-query">You have searched for: <strong><%= searchQuery %></strong></p>
                 <% } %>
 
+                <% if (games.length === 0){ %>
+                <strong class="no-results-message">There are <span>no results</span> to show :( </strong>
+                <% } %>
+
                 <% games.forEach(game => { %>
                 <article class="game">
                     <a href='games/<%= game.id %>'>
@@ -73,3 +79,5 @@
         </section>
     </main>
 </body>
+
+</html>
