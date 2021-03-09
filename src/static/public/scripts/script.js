@@ -5,3 +5,6 @@ genreButtons.forEach(button => {
         this.form.submit()
     })
 })
+
+//hide submit button when javascript is enabled;
+const submitGenreButton = document.querySelector(".submit-genre-button").classList.add('hide')

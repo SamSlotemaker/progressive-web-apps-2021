@@ -92,6 +92,21 @@ main>section:nth-of-type(2) form>label {
     opacity: .7;
 }
 
+.submit-genre-button {
+    font-size: 1em;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    margin-left: 1em;
+    padding: .8em;
+    opacity: .7;
+    border: none;
+}
+
+.submit-genre-button.hide {
+    display: none;
+}
+
 main>section:nth-of-type(2) form>input:checked+label {
     opacity: 1;
     background-color: var(--orange);
@@ -144,6 +159,15 @@ main>section:nth-of-type(2) form>input:checked+label {
 .game header {
     padding: 1em;
     color: white;
+}
+
+.game header h2 {
+    margin-bottom: 0;
+}
+
+.game header h3 {
+    margin-top: 0;
+    font-weight: 300;
 }
 
 .game img {
@@ -318,7 +342,10 @@ form input {
 }
 
 /* 404 ERROR PAGE */
-.error {}
+.error {
+    max-width: 1400px;
+    margin: auto;
+}
 
 .error h1 {
     max-width: 100000em;
