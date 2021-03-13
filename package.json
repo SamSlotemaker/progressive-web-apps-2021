@@ -4,10 +4,9 @@
   "description": "progressive web app for the web development course",
   "main": "./src/index.js",
   "scripts": {
+    "prestart": "rollup -c",
     "start": "node ./dist/index.js",
-    "dev": "nodemon ./src/index.js",
-    "build": "rollup -c",
-    "test": "npm test"
+    "dev": "nodemon ./src/index.js"
   },
   "repository": {
     "type": "git",
