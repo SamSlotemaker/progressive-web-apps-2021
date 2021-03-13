@@ -1,0 +1,366 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
+
+:root {
+    --light-grey: #000000;
+    --white: #fff;
+    --bgc: rgb(211, 210, 210);
+    --orange: #F97E2B;
+}
+
+* {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    color: var(--light-grey);
+    background-color: var(--bgc);
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    padding: 0em 3em;
+}
+
+h1 {
+    color: var(--orange);
+    font-size: 3em;
+    max-width: 1400px;
+    margin: 1em auto;
+}
+
+body>main>section {
+    max-width: 1400px;
+    margin: 0em auto 4em auto;
+}
+
+/* FAVORITES */
+.favorites {
+    padding: 0;
+    list-style-type: none;
+}
+
+.favorites li {
+    height: 15vh;
+    /* border-bottom: var(--orange) 2px solid; */
+    margin-bottom: 1em;
+}
+
+.favorites li a {
+    text-decoration: none;
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.favorites li img {
+    height: 100%;
+    width: 30vh;
+    object-fit: cover;
+    object-position: top;
+}
+
+.favorites div {
+    margin-left: 1em
+}
+
+.favorites h3 {
+    margin: 0;
+    color: black;
+    text-transform: uppercase;
+}
+
+.favorites strong {
+    color: black;
+}
+
+
+/* GAMES */
+/* games genre form */
+main>section:nth-of-type(2) form {
+    margin: 2em 0em;
+}
+
+main>section:nth-of-type(2) form>input {
+    position: absolute;
+    left: -1000em;
+}
+
+main>section:nth-of-type(2) form>label {
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    padding: .8em;
+    opacity: .7;
+}
+
+.submit-genre-button {
+    font-size: 1em;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    margin-left: 1em;
+    padding: .8em;
+    opacity: .7;
+    border: none;
+}
+
+.submit-genre-button.hide {
+    display: none;
+}
+
+main>section:nth-of-type(2) form>input:checked+label {
+    opacity: 1;
+    background-color: var(--orange);
+}
+
+.games .loading {
+    width: 100%;
+    height: 40vh;
+    background-color: rgb(102, 102, 102);
+}
+
+.games {
+    display: grid;
+    gap: 1em;
+    grid-template-columns: repeat(3, 1fr);
+    margin: auto;
+}
+
+.search-query {
+    grid-column: 1 / -1;
+}
+
+.search-query>strong {
+    color: var(--orange);
+    font-size: 1.2em;
+}
+
+.no-results-message {
+    font-size: 4em;
+    grid-column: 1 / -1;
+}
+
+.no-results-message>span {
+    color: var(--orange);
+}
+
+.game {
+    position: relative;
+    height: 40vh;
+    margin: 0;
+}
+
+.game a {
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    display: block;
+}
+
+.game header {
+    padding: 1em;
+    color: white;
+}
+
+.game header h2 {
+    margin-bottom: 0;
+}
+
+.game header h3 {
+    margin-top: 0;
+    font-weight: 300;
+}
+
+.game img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -2;
+}
+
+.game .thumbnail-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: black;
+    z-index: -1;
+    opacity: .7;
+}
+
+.game .genre {
+    position: absolute;
+    bottom: 0;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: .9em;
+    right: 0;
+    background-color: white;
+    margin: 0;
+    color: black;
+    padding: .5em;
+}
+
+.game:hover {
+    transform: scale(1.02) translateY(-10px);
+}
+
+/* PLATFORMS */
+.platforms {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    color: white;
+}
+
+.platform {
+    position: relative;
+    width: 100%;
+    height: 300px;
+}
+
+.platform img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.platform .overlay {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+}
+
+.platform .image-overlay {
+    z-index: 2;
+    opacity: .75;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: block;
+}
+
+.platform h3 {
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+}
+
+.platform h3 span {
+    margin-left: .25em;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+
+/* DETAILS */
+.game-details {
+    max-width: 1400px;
+    margin: 7em auto;
+}
+
+.game-details .grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
+}
+
+.game-details .back-button {
+    display: inline-block;
+    position: absolute;
+    top: 2em;
+    left: 1em;
+    padding: .5em 1em;
+    background-color: black;
+    color: white;
+    margin: 1em;
+}
+
+.game-details img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.game-details p,
+.game-details h2 {
+    margin: 0;
+    padding: 0;
+}
+
+.game-details h2 {
+    line-height: 1em;
+    margin-bottom: .5em;
+}
+
+.favorite-button {
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    border: none;
+    background-color: var(--orange);
+    border-radius: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+}
+
+.favorite-button svg {
+    pointer-events: none;
+    transform: translateY(1px);
+    width: 80%;
+    height: 80%;
+    fill: white;
+    stroke-width: 3px;
+}
+
+.favorite-button.active svg {
+    fill: red;
+}
+
+form input {
+    padding: 1em;
+    font-size: 1em;
+    color: black;
+    background-color: var(--white);
+    border: none;
+    position: absolute;
+    top: 3em;
+    right: 3em;
+}
+
+/* 404 ERROR PAGE */
+.error {
+    max-width: 1400px;
+    margin: auto;
+}
+
+.error h1 {
+    max-width: 100000em;
+    margin-bottom: 0;
+}
+
+.error p {
+    margin-top: 3em;
+    font-size: 1.3em;
+}
+
+.error p a {
+    display: inline-block;
+    padding: .5em 1em;
+    background-color: var(--orange);
+    color: white;
+    margin: 1em;
+}
