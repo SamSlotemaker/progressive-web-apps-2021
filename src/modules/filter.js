@@ -10,7 +10,7 @@ module.exports = function filterGameList(array, searchQuery, genreQuery) {
     }
     //return original array
     else {
-        return array;
+        return array
     }
 }
 

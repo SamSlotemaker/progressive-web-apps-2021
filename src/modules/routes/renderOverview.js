@@ -10,8 +10,8 @@ const pageQuery = pageSize + page
 const ordering = '?ordering=-games_count'
 
 //set initial datastate to null
-let gameData = null;
-let platformData = null;
+let gameData = null
+let platformData = null
 
 //renders the overview page
 module.exports = async function renderOverviewPage(req, res) {

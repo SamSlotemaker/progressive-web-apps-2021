@@ -1,4 +1,4 @@
-const fetch = require("node-fetch")
+const fetch = require('node-fetch')
 const baseURL = 'https://api.rawg.io/api/'
 require('dotenv').config()
 
