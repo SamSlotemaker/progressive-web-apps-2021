@@ -1,14 +1,17 @@
+const CACHE_NAME = 'offline';
+const urlsToCache = [
+    '/offline',
+    '/styles/style.css'
+]
+
 //when worker installs
 self.addEventListener('install', (event) => {
     console.log('installing')
     event.waitUntil((async () => {
-        const cacheOffline = await caches.open('offline');
-        await cacheOffline.add(new Request('/offline'));
-
-        const cacheCss = await caches.open('cached-css');
-        await cacheCss.add(new Request('/styles/style.css'));
-
-        self.skipWaiting()
+        const cacheOffline = await caches.open(CACHE_NAME);
+        await cacheOffline.addAll(urlsToCache).then(() => {
+            self.skipWaiting()
+        });
     })())
 });
 
@@ -19,16 +22,36 @@ self.addEventListener('activate', (event) => {
 
 //when worker fetches
 self.addEventListener('fetch', (event) => {
-    event.respondWith((async () => {
-        try {
-            //try to fetch the urls
-            const networkResponse = await fetch(event.request);
-            return networkResponse;
-        } catch (error) {
-            //catch error when fetching fails and respond with the offline page
-            const cache = await caches.open('offline');
-            const cachedResponse = await cache.match('/offline');
-            return cachedResponse;
-        }
-    })());
+    //catch failing html requests 
+    if (event.request.method === 'GET' &&
+        event.request.headers.get('accept').indexOf('text/html') !== -1) {
+        event.respondWith((async () => {
+            try {
+                //try to fetch the urls
+                const networkResponse = await fetch(event.request);
+                return networkResponse;
+            } catch (error) {
+                //catch error when fetching fails and respond with the offline page
+                const cache = await caches.open(CACHE_NAME);
+                const cachedResponse = await cache.match('/offline');
+                return cachedResponse;
+            }
+        })())
+    }
+    //catch failing css requests
+    else if (event.request.method === 'GET' &&
+        event.request.headers.get('accept').indexOf('text/css') !== -1) {
+        event.respondWith((async () => {
+            try {
+                //try to fetch the urls
+                const networkResponse = await fetch(event.request);
+                return networkResponse;
+            } catch (error) {
+                //catch error when fetching fails and respond with the offline page
+                const cache = await caches.open(CACHE_NAME);
+                const cachedResponse = await cache.match('/styles/style.css');
+                return cachedResponse;
+            }
+        })())
+    }
 });
