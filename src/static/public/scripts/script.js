@@ -12,7 +12,7 @@ async function send() {
     const register = await navigator.serviceWorker.register('./service-worker.js', {
         scope: '/'
     })
-    console.log('Registered worker');
+    console.log('Registered worker')
 }
 
 //hide submit button when javascript is enabled;

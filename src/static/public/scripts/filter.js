@@ -1,6 +1,6 @@
 let radios = document.querySelectorAll('form>input')
 let gamesSection = document.querySelector('.games')
-let gameList = null;
+let gameList = null
 
 //add rending from gamelist to each radio button on change
 radios.forEach(radio => {
@@ -16,7 +16,7 @@ getData('/gamesJSON').then(result => {
 function renderGameList(gameList, value) {
     const filteredList = filterOnGenre(gameList, value)
     const gameArticles = createGameList(filteredList)
-    gamesSection.innerHTML = '';
+    gamesSection.innerHTML = ''
     gameArticles.forEach(article => {
         gamesSection.insertAdjacentHTML('beforeend', article)
     })

@@ -19,8 +19,8 @@ app.get('/gamesJSON', overviewPage.sendGamesJSON)
 app.get('/offline', (req, res) => {
     res.render('offline.ejs')
 })
-app.get("/service-worker.js", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "static/public/scripts", "service-worker.js"));
+app.get('/service-worker.js', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'static/public/scripts', 'service-worker.js'))
 })
 app.get('*', (req, res) => {
     res.render('error')
