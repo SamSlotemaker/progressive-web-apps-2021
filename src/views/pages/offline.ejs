@@ -2,8 +2,11 @@
 <html lang="en">
 <%- include('../partials/head.ejs') %>
 
-<body>
-    <h1>Je bent offline!</h1>
+<body class="offline">
+    <h1>Oops!</h1>
+    <h2>You are offline</h2>
+    <p>We could try to redirect you to another page but i'm afraid you need to fix your internet connection first.</p>
+    <button onClick="window.location.reload();">Try again</button>
 </body>
 
 </html>

@@ -15,7 +15,7 @@ app.set('views', path.join(__dirname, 'views/pages'))
 //get routes 
 app.get('/', overviewPage.renderOverviewPage)
 app.get('/games/:id', renderDetailPage)
-app.get('/jsonData', overviewPage.passJson)
+app.get('/gamesJSON', overviewPage.sendGamesJSON)
 app.get('/offline', (req, res) => {
     res.render('offline.ejs')
 })

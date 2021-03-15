@@ -9,7 +9,7 @@ radios.forEach(radio => {
     })
 })
 //fetch data from backend
-getData('/jsonData').then(result => {
+getData('/gamesJSON').then(result => {
     gameList = result
 })
 //render gameList into html

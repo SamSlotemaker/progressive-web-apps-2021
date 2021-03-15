@@ -365,6 +365,25 @@ main>section:nth-of-type(2) form>input:checked+label {
     margin: 1em;
 }
 
+/* Offline page */
+.offline h1 {
+    margin-bottom: 0;
+}
+
+.offline h2 {
+    margin-top: 0;
+}
+
+.offline button {
+    display: block;
+    padding: .5em 1em;
+    background-color: var(--orange);
+    font-size: 1.5em;
+    color: white;
+    border: none;
+    margin: 1em 0em;
+}
+
 @media screen and (min-width: 650px) {
     .games {
         grid-template-columns: 1fr 1fr;

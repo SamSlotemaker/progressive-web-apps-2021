@@ -35,11 +35,11 @@ async function renderOverviewPage(req, res) {
     res.render('overview', { games: filteredGameList, platforms: platformList, genres: genres, filteredGenre: req.query.genres, searchQuery: req.query.search })
 }
 
-function passJson(req, res) {
+function sendGamesJSON(req, res) {
     res.json(gameData)
 }
 
-exports.passJson = passJson
+exports.sendGamesJSON = sendGamesJSON
 exports.renderOverviewPage = renderOverviewPage
 
 
