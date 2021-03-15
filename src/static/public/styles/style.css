@@ -24,12 +24,22 @@ h1 {
     color: var(--orange);
     font-size: 3em;
     max-width: 1400px;
-    margin: 1em auto;
+    margin: 1em auto .5em auto;
+
 }
 
 body>main>section {
     max-width: 1400px;
     margin: 0em auto 4em auto;
+}
+
+/* search */
+form input {
+    padding: 1em;
+    font-size: 1em;
+    color: black;
+    background-color: var(--white);
+    border: none;
 }
 
 /* FAVORITES */
@@ -121,7 +131,7 @@ main>section:nth-of-type(2) form>input:checked+label {
 .games {
     display: grid;
     gap: 1em;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
     margin: auto;
 }
 
@@ -330,16 +340,6 @@ main>section:nth-of-type(2) form>input:checked+label {
     fill: red;
 }
 
-form input {
-    padding: 1em;
-    font-size: 1em;
-    color: black;
-    background-color: var(--white);
-    border: none;
-    position: absolute;
-    top: 3em;
-    right: 3em;
-}
 
 /* 404 ERROR PAGE */
 .error {
@@ -363,4 +363,27 @@ form input {
     background-color: var(--orange);
     color: white;
     margin: 1em;
+}
+
+@media screen and (min-width: 650px) {
+    .games {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .games {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    h1 {
+        margin-top: 1em;
+    }
+
+    /* search */
+    main>form {
+        position: absolute;
+        top: 3em;
+        right: 3em;
+    }
 }

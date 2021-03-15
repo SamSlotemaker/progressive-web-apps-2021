@@ -14,7 +14,7 @@ let gameData = null
 let platformData = null
 
 //renders the overview page
-module.exports = async function renderOverviewPage(req, res) {
+async function renderOverviewPage(req, res) {
     //get data when it doensn't already exist
     if (!gameData && !platformData) {
         gameData = await getData(subjectGames, pageQuery)
@@ -34,5 +34,12 @@ module.exports = async function renderOverviewPage(req, res) {
     // render page with the lists
     res.render('overview', { games: filteredGameList, platforms: platformList, genres: genres, filteredGenre: req.query.genres, searchQuery: req.query.search })
 }
+
+function passJson(req, res) {
+    res.json(gameData)
+}
+
+exports.passJson = passJson
+exports.renderOverviewPage = renderOverviewPage
 
 

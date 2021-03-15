@@ -3,7 +3,7 @@ const app = express()
 const port = process.env.PORT || 3000
 const path = require('path')
 
-const renderOverviewPage = require('./modules/routes/renderOverview.js')
+const overviewPage = require('./modules/routes/renderOverview.js')
 const renderDetailPage = require('./modules/routes/renderDetail.js')
 
 //declare middleware
@@ -13,14 +13,15 @@ app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views/pages'))
 
 //get routes 
-app.get('/', renderOverviewPage)
+app.get('/', overviewPage.renderOverviewPage)
 app.get('/games/:id', renderDetailPage)
+app.get('/jsonData', overviewPage.passJson)
 app.get('/offline', (req, res) => {
     res.render('offline.ejs')
 })
 app.get("/service-worker.js", (req, res) => {
     res.sendFile(path.resolve(__dirname, "static/public/scripts", "service-worker.js"));
-});
+})
 app.get('*', (req, res) => {
     res.render('error')
 })
