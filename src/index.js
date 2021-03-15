@@ -15,6 +15,12 @@ app.set('views', path.join(__dirname, 'views/pages'))
 //get routes 
 app.get('/', renderOverviewPage)
 app.get('/games/:id', renderDetailPage)
+app.get('/offline', (req, res) => {
+    res.render('offline.ejs')
+})
+app.get("/service-worker.js", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "static/public/scripts", "service-worker.js"));
+});
 app.get('*', (req, res) => {
     res.render('error')
 })
