@@ -4,8 +4,10 @@
   "description": "progressive web app for the web development course",
   "main": "./src/index.js",
   "scripts": {
+    "prebuild": "eslint src/** --fix",
     "build": "rollup -c",
-    "start": "npm run build && node ./dist/index.js",
+    "start2": "npm run build && node ./dist/index.js",
+    "start": "node ./src/index.js",
 
     "dev": "nodemon ./src/index.js"
   },
