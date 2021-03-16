@@ -1,4 +1,4 @@
-const CACHE_NAME = 'offline'
+const CACHE_NAME = 'core_assets'
 const urlsToCache = [
     '/offline',
     '/styles/style.css'
@@ -18,13 +18,13 @@ self.addEventListener('install', (event) => {
 //when worker activates
 self.addEventListener('activate', (event) => {
     console.log('activate')
+    event.waitUntil(clients.claim());
 })
 
 //when worker fetches
 self.addEventListener('fetch', (event) => {
     //catch failing html requests 
-    if (event.request.method === 'GET' &&
-        event.request.headers.get('accept').indexOf('text/html') !== -1) {
+    if (isHtmlRequest(event.request)) {
         event.respondWith((async () => {
             try {
                 //try to fetch the urls
@@ -39,8 +39,7 @@ self.addEventListener('fetch', (event) => {
         })())
     }
     //catch failing css requests
-    else if (event.request.method === 'GET' &&
-        event.request.headers.get('accept').indexOf('text/css') !== -1) {
+    else if (isCssRequest(event.request)) {
         event.respondWith((async () => {
             try {
                 //try to fetch the urls
@@ -55,3 +54,12 @@ self.addEventListener('fetch', (event) => {
         })())
     }
 })
+
+function isHtmlRequest(request) {
+    return request.method === 'GET' &&
+        request.headers.get('accept').indexOf('text/html') !== -1
+}
+function isCssRequest(request) {
+    return request.method === 'GET' &&
+        request.headers.get('accept').indexOf('text/css') !== -1
+}
