@@ -1,7 +1,10 @@
 const CORE_CACHES = 'core_assets'
+//core urls to always cache on install
 const urlsToCache = [
     '/offline',
     '/styles/style.css',
+    '/scripts/filter.js',
+    '/scripts/script.js',
     '/gamesJSON'
 ]
 
@@ -24,51 +27,32 @@ self.addEventListener('activate', (event) => {
 
 //when worker fetches
 self.addEventListener('fetch', (event) => {
-    //catch failing html requests 
-    if (isHtmlRequest(event.request)) {
-        event.respondWith((async () => {
-            try {
-                //try to fetch the urls
-                return caches.open('html-cache')
-                    .then(cache => cache.match(event.request.url))
-                    .then(response => response ? response : fetchAndCache(event.request, 'html-cache'))
-
-                // const networkResponse = await fetch(event.request)
-                // return networkResponse
-            } catch (error) {
-                //catch error when fetching fails and respond with the offline page
-                const cache = await caches.open(CORE_CACHES)
-                const cachedResponse = await cache.match('/offline')
-                return cachedResponse
-            }
-        })())
+    //catch core files 
+    if (isCoreGetRequest(event.request)) {
+        console.log('Core get request: ', event.request.url);
+        return event.respondWith(
+            caches.open(CORE_CACHES)
+                .then(cache => cache.match(event.request.url))
+        )
     }
-    //catch failing css requests
-    else if (isCssRequest(event.request)) {
-        event.respondWith((async () => {
-            try {
-                //try to fetch the urls
-                const networkResponse = await fetch(event.request)
-                return networkResponse
-            } catch (error) {
-                //catch error when fetching fails and respond with the offline page
-                const cache = await caches.open(CORE_CACHES)
-                const cachedResponse = await cache.match('/styles/style.css')
-                return cachedResponse
-            }
-        })())
+    //catch failing html requests 
+    else if (isHtmlRequest(event.request)) {
+        console.log('html request')
+        return event.respondWith((async () => {
+            //try to fetch the urls
+            return caches.open('html-cache')
+                .then(cache => cache.match(event.request.url))
+                .then(response => response ? response : fetchAndCache(event.request, 'html-cache'))
+                .catch(error => {
+                    return caches.open(CORE_CACHES)
+                        .then(cache => cache.match('/offline'))
+
+                })
+        }
+        )())
     }
 })
-
-function isHtmlRequest(request) {
-    return request.method === 'GET' &&
-        request.headers.get('accept').indexOf('text/html') !== -1
-}
-function isCssRequest(request) {
-    return request.method === 'GET' &&
-        request.headers.get('accept').indexOf('text/css') !== -1
-}
-
+//fetch page, put response in cache and return response
 function fetchAndCache(request, cacheName) {
     return fetch(request)
         .then(response => {
@@ -80,4 +64,18 @@ function fetchAndCache(request, cacheName) {
             caches.open(cacheName).then((cache) => cache.put(request, clone))
             return response
         })
+}
+
+function isHtmlRequest(request) {
+    return request.method === 'GET' &&
+        request.headers.get('accept').indexOf('text/html') !== -1
+}
+function isCssRequest(request) {
+    return request.method === 'GET' &&
+        request.headers.get('accept').indexOf('text/css') !== -1
+}
+function isCoreGetRequest(request) {
+    const url = new URL(request.url)
+    const pathname = url.pathname
+    return request.method === 'GET' && urlsToCache.includes(pathname);
 }

@@ -46,7 +46,7 @@ function createGameList(gameList) {
         //insert game articles
         return (
             `<article class="game">
-                    <a href='game/${game.id}'>
+                    <a href='games/${game.id}'>
                         <header>
                             <h2>${game.name}</h2>
                             <h3>Rating: ${game.rating}</h3>
