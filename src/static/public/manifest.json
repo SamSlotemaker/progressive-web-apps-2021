@@ -1,0 +1,10 @@
+{
+    "name": "Gamepicker",
+    "short_name": "Gamepicker",
+    "theme_color": "#D3D2D2",
+    "background_color": "#D3D2D2",
+    "display": "standalone",
+    "Scope": "/",
+    "start_url": "/",
+    "description": "Find new games among the most favorite"
+  }
