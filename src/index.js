@@ -2,11 +2,14 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT || 3000
 const path = require('path')
+var compression = require('compression')
 
 const overviewPage = require('./modules/routes/renderOverview.js')
 const renderDetailPage = require('./modules/routes/renderDetail.js')
 
+
 //declare middleware
+app.use(compression())
 app.use(express.static(path.join(__dirname, 'static/public')))
 app.use(express.urlencoded({ extended: false }))
 app.set('view engine', 'ejs')

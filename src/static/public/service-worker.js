@@ -1,4 +1,6 @@
+const CORE_CACHE_VERSION = 'v5'
 const CORE_CACHES = 'core_assets'
+const CASH_NAME = CORE_CACHES + "-" + CORE_CACHE_VERSION
 //core urls to always cache on install
 const urlsToCache = [
     '/offline',
@@ -12,7 +14,7 @@ const urlsToCache = [
 self.addEventListener('install', (event) => {
     console.log('installing')
     event.waitUntil((async () => {
-        const cacheOffline = await caches.open(CORE_CACHES)
+        const cacheOffline = await caches.open(CASH_NAME)
         await cacheOffline.addAll(urlsToCache).then(() => {
             self.skipWaiting()
         })
@@ -22,20 +24,36 @@ self.addEventListener('install', (event) => {
 //when worker activates
 self.addEventListener('activate', (event) => {
     console.log('activate')
-    event.waitUntil(clients.claim());
+    event.waitUntil(clients.claim())
+
+    //delete old caches
+    event.waitUntil(
+        caches.keys().then(function (cacheNames) {
+            console.log(cacheNames)
+            return Promise.all(
+                cacheNames.filter(function (cacheName) {
+                    if (cacheName !== 'html-assets' && cacheName.includes(CORE_CACHES) && cacheName !== CASH_NAME) {
+                        return true;
+                    }
+                }).map(function (cacheName) {
+                    return caches.delete(cacheName);
+                })
+            );
+        })
+    );
 })
 
 //when worker fetches
 self.addEventListener('fetch', (event) => {
     //catch core files 
     if (isCoreGetRequest(event.request)) {
-        console.log('Core get request: ', event.request.url);
+        console.log('Core get request: ', event.request.url)
         return event.respondWith(
-            caches.open(CORE_CACHES)
+            caches.open(CASH_NAME)
                 .then(cache => cache.match(event.request.url))
         )
     }
-    //catch failing html requests 
+    //html requests
     else if (isHtmlRequest(event.request)) {
         console.log('html request')
         return event.respondWith((async () => {
@@ -44,7 +62,8 @@ self.addEventListener('fetch', (event) => {
                 .then(cache => cache.match(event.request.url))
                 .then(response => response ? response : fetchAndCache(event.request, 'html-cache'))
                 .catch(error => {
-                    return caches.open(CORE_CACHES)
+                    //catch failing html requests 
+                    return caches.open(CASH_NAME)
                         .then(cache => cache.match('/offline'))
 
                 })
@@ -57,9 +76,8 @@ function fetchAndCache(request, cacheName) {
     return fetch(request)
         .then(response => {
             if (!response.ok) {
-                throw new TypeError('Bad response status');
+                throw new TypeError('Bad response status')
             }
-
             const clone = response.clone()
             caches.open(cacheName).then((cache) => cache.put(request, clone))
             return response
@@ -77,5 +95,5 @@ function isCssRequest(request) {
 function isCoreGetRequest(request) {
     const url = new URL(request.url)
     const pathname = url.pathname
-    return request.method === 'GET' && urlsToCache.includes(pathname);
+    return request.method === 'GET' && urlsToCache.includes(pathname)
 }

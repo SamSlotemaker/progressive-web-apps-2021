@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="eng">
+<html lang="en">
 <%- include('./../partials/head.ejs'); %>
 
 <body>
@@ -57,7 +57,7 @@
                         <div class="thumbnail-container">
 
                         </div>
-                        <img src="<%= game.background_image %>" alt="" />
+                        <img loading="lazy" src="<%= game.background_image %>" alt="" />
                     </a>
                 </article>
                 <% }) %>
@@ -73,7 +73,7 @@
                         <h2><%= platform.name %></h2>
                         <h3>Games: <span><%= platform.games_count %></span></h3>
                     </div>
-                    <img src="<%= platform.image_background %>" alt="" />
+                    <img loading="lazy" src="<%= platform.image_background %>" alt="" />
                 </article>
                 <% }) %>
             </div>

@@ -6,5 +6,12 @@
     "display": "standalone",
     "Scope": "/",
     "start_url": "/",
-    "description": "Find new games among the most favorite"
+    "description": "Find new games among the most favorite",
+    "icons": [
+      {
+        "src": "styles/images/icon.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      }
+    ]
   }
