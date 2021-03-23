@@ -1,6 +1,6 @@
 const CORE_CACHE_VERSION = 'v5'
 const CORE_CACHES = 'core_assets'
-const CASH_NAME = CORE_CACHES + "-" + CORE_CACHE_VERSION
+const CASH_NAME = CORE_CACHES + '-' + CORE_CACHE_VERSION
 //core urls to always cache on install
 const urlsToCache = [
     '/offline',
@@ -32,14 +32,14 @@ self.addEventListener('activate', (event) => {
             return Promise.all(
                 cacheNames.filter(function (cacheName) {
                     if (cacheName !== 'html-assets' && cacheName.includes(CORE_CACHES) && cacheName !== CASH_NAME) {
-                        return true;
+                        return true
                     }
                 }).map(function (cacheName) {
-                    return caches.delete(cacheName);
+                    return caches.delete(cacheName)
                 })
-            );
+            )
         })
-    );
+    )
 })
 
 //when worker fetches
