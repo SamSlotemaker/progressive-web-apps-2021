@@ -28,7 +28,6 @@ app.get('/service-worker.js', (req, res) => {
 app.get('*', (req, res) => {
     res.render('error')
 })
-
 //start express server
 app.listen(port, () => {
     console.log(`app listening on port: ${port}`)

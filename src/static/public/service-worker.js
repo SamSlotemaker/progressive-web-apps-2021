@@ -29,7 +29,6 @@ self.addEventListener('activate', (event) => {
     //delete old caches
     event.waitUntil(
         caches.keys().then(function (cacheNames) {
-            console.log(cacheNames)
             return Promise.all(
                 cacheNames.filter(function (cacheName) {
                     if (cacheName !== 'html-assets' && cacheName.includes(CORE_CACHES) && cacheName !== CASH_NAME) {
@@ -47,7 +46,6 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
     //catch core files 
     if (isCoreGetRequest(event.request)) {
-        console.log('Core get request: ', event.request.url)
         return event.respondWith(
             caches.open(CASH_NAME)
                 .then(cache => cache.match(event.request.url))
@@ -55,7 +53,6 @@ self.addEventListener('fetch', (event) => {
     }
     //html requests
     else if (isHtmlRequest(event.request)) {
-        console.log('html request')
         return event.respondWith((async () => {
             //try to fetch the urls
             return caches.open('html-cache')
