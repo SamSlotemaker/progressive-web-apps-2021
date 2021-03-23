@@ -1,4 +1,4 @@
-const CORE_CACHE_VERSION = 'v5'
+const CORE_CACHE_VERSION = 'v7'
 const CORE_CACHES = 'core_assets'
 const CASH_NAME = CORE_CACHES + '-' + CORE_CACHE_VERSION
 //core urls to always cache on install
@@ -12,7 +12,6 @@ const urlsToCache = [
 
 //when worker installs
 self.addEventListener('install', (event) => {
-    console.log('installing')
     event.waitUntil((async () => {
         const cacheOffline = await caches.open(CASH_NAME)
         await cacheOffline.addAll(urlsToCache).then(() => {
@@ -23,7 +22,6 @@ self.addEventListener('install', (event) => {
 
 //when worker activates
 self.addEventListener('activate', (event) => {
-    console.log('activate')
     event.waitUntil(clients.claim())
 
     //delete old caches
@@ -62,7 +60,6 @@ self.addEventListener('fetch', (event) => {
                     //catch failing html requests 
                     return caches.open(CASH_NAME)
                         .then(cache => cache.match('/offline'))
-
                 })
         }
         )())
@@ -82,12 +79,13 @@ function fetchAndCache(request, cacheName) {
 }
 
 function isHtmlRequest(request) {
-    return request.method === 'GET' &&
-        request.headers.get('accept').indexOf('text/html') !== -1
-}
-function isCssRequest(request) {
-    return request.method === 'GET' &&
-        request.headers.get('accept').indexOf('text/css') !== -1
+    try {
+        return request.method === 'GET' &&
+            request.headers.get('accept').indexOf('text/html') !== -1
+    }
+    catch (err) {
+        return false
+    }
 }
 function isCoreGetRequest(request) {
     const url = new URL(request.url)

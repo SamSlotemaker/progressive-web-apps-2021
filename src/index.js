@@ -7,7 +7,6 @@ var compression = require('compression')
 const overviewPage = require('./modules/routes/renderOverview.js')
 const renderDetailPage = require('./modules/routes/renderDetail.js')
 
-
 //declare middleware
 app.use(compression())
 app.use(express.static(path.join(__dirname, 'static/public')))
