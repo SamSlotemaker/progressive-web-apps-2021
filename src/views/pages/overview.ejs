@@ -61,21 +61,6 @@
                 <% }) %>
             </div>
         </section>
-        <section>
-            <h2>All platforms</h2>
-            <div class="platforms">
-                <% platforms.forEach(platform => { %>
-                <article class="platform">
-                    <div class="image-overlay"></div>
-                    <div class="overlay">
-                        <h2><%= platform.name %></h2>
-                        <h3>Games: <span><%= platform.games_count %></span></h3>
-                    </div>
-                    <img loading="lazy" src="<%= platform.image_background %>" alt="" />
-                </article>
-                <% }) %>
-            </div>
-        </section>
     </main>
     <script src="/scripts/filter.js" defer></script>
 </body>
