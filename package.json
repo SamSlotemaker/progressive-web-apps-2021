@@ -4,8 +4,10 @@
   "description": "progressive web app for the web development course",
   "main": "./src/index.js",
   "scripts": {
-    "build": "rollup -c",
-    "start": "npm run build && node ./dist/index.js",
+    "build:js": "rollup -c",
+    "build": "npm run build:js",
+    "prestart": "npm run build",
+    "start": "node ./dist/index.js",
     "dev": "nodemon ./src/index.js"
   },
   "repository": {
@@ -22,14 +24,16 @@
     "node": "14.16.0"
   },
   "dependencies": {
+    "@rollup/plugin-commonjs": "^17.1.0",
     "body-parser": "^1.19.0",
+    "clean-css": "^5.1.2",
     "compression": "^1.7.4",
+    "css-minify": "^1.1.0",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.6",
+    "eslint": "^7.22.0",
     "express": "^4.17.1",
     "node-fetch": "^2.6.1",
-    "@rollup/plugin-commonjs": "^17.1.0",
-    "eslint": "^7.22.0",
     "rollup": "^2.41.2",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-delete": "^2.0.0",
