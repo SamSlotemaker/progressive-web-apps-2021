@@ -23,7 +23,6 @@ async function renderOverviewPage(req, res) {
     }
     //create unique genrelist
     const genres = createUniqueGenreList(gameData)
-
     //extract results from data
     const gameList = gameData.results
     const platformList = platformData.results

@@ -3,7 +3,7 @@ import del from 'rollup-plugin-delete';
 import { uglify } from "rollup-plugin-uglify";
 import commonjs from '@rollup/plugin-commonjs';
 
-export default {
+export default [{
     input: 'src/index.js',
     output: {
         dir: 'dist',
@@ -21,5 +21,15 @@ export default {
         commonjs(),
         uglify()
     ],
-    external: ['express', 'path', 'node-fetch', 'ejs']
-};
+    external: ['express', 'path', 'node-fetch', 'ejs', 'compression', 'dotenv']
+},
+{
+    input: 'src/static/public/scripts/filter.js',
+    output: {
+        dir: 'dist/static/public/scripts',
+        format: 'es'
+    },
+    plugins: [
+        uglify()
+    ]
+}];
