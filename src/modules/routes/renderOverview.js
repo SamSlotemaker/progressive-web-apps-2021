@@ -7,20 +7,16 @@ const subjectPlatforms = 'platforms'
 const pageSize = '?page_size=10'
 const ordering = '?ordering=-games_count'
 
-//set initial datastate to null
-let gameData = null
-let platformData = null
-
 //renders the overview page
 async function renderOverviewPage(req, res) {
     //get data when it doensn't already exist
-    let page = '&page='
+    let pageNumber = 1;
     if (req.query.page) {
-        page += req.query.page
-    } else {
-        page += '1'
+        pageNumber = parseInt(req.query.page)
     }
+    let page = '&page=' + pageNumber
     const pageQuery = pageSize + page
+
     console.log('getting:' + pageQuery)
     gameData = await getData(subjectGames, pageQuery)
     platformData = await getData(subjectPlatforms, ordering)
@@ -33,8 +29,15 @@ async function renderOverviewPage(req, res) {
     //filter gamelist on what query has been entered, returns original array on empty queries
     let filteredGameList = filterGameList(gameList, req.query.search, req.query.genres)
 
+    //paging
+    let prevPage = pageNumber - 1
+    let nextPage = pageNumber + 1
+
+    console.log(typeof pageNumber)
+    console.log(prevPage)
+    console.log(nextPage)
     // render page with the lists
-    res.render('overview', { games: filteredGameList, genres: genres, filteredGenre: req.query.genres, searchQuery: req.query.search })
+    res.render('overview', { games: filteredGameList, genres: genres, filteredGenre: req.query.genres, searchQuery: req.query.search, prevPage, nextPage })
 }
 
 function sendGamesJSON(req, res) {
