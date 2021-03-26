@@ -3,9 +3,8 @@ const createUniqueGenreList = require('../genres.js')
 const filterGameList = require('../filter.js')
 
 const subjectGames = 'games'
-const subjectPlatforms = 'platforms'
 const pageSize = '?page_size=10'
-const ordering = '?ordering=-games_count'
+let gameData = null;
 
 //renders the overview page
 async function renderOverviewPage(req, res) {
@@ -19,7 +18,6 @@ async function renderOverviewPage(req, res) {
 
     console.log('getting:' + pageQuery)
     gameData = await getData(subjectGames, pageQuery)
-    platformData = await getData(subjectPlatforms, ordering)
     console.log('retrieve data...')
     //create unique genrelist
     const genres = createUniqueGenreList(gameData)
