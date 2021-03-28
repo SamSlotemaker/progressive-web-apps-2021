@@ -1,4 +1,4 @@
-const CORE_CACHE_VERSION = 'v11'
+const CORE_CACHE_VERSION = 'v12'
 const CORE_CACHES = 'core_assets'
 const CASH_NAME = CORE_CACHES + '-' + CORE_CACHE_VERSION
 //core urls to always cache on install
