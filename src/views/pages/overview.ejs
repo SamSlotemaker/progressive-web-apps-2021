@@ -60,10 +60,12 @@
                 </article>
                 <% }) %>
             </div>
-            <% if (prevPage !== 0) { %>
-            <a class="prev-button" href="/?page=<%= prevPage %>">Previous</a>
-            <% } %>
-            <a class="next-button" href="/?page=<%= nextPage %>">Next</a>
+            <div class="page-buttons">
+                <% if (prevPage !== 0) { %>
+                <a class="prev-button page-button" href="/?page=<%= prevPage %>">Previous</a>
+                <% } %>
+                <a class="next-button page-button" href="/?page=<%= nextPage %>">Next</a>
+            </div>
         </section>
     </main>
     <script src="/scripts/filter.js" defer></script>

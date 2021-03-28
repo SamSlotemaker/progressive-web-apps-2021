@@ -15,10 +15,7 @@ async function renderOverviewPage(req, res) {
     }
     let page = '&page=' + pageNumber
     const pageQuery = pageSize + page
-
-    console.log('getting:' + pageQuery)
     gameData = await getData(subjectGames, pageQuery)
-    console.log('retrieve data...')
     //create unique genrelist
     const genres = createUniqueGenreList(gameData)
     //extract results from data
@@ -30,10 +27,6 @@ async function renderOverviewPage(req, res) {
     //paging
     let prevPage = pageNumber - 1
     let nextPage = pageNumber + 1
-
-    console.log(typeof pageNumber)
-    console.log(prevPage)
-    console.log(nextPage)
     // render page with the lists
     res.render('overview', { games: filteredGameList, genres: genres, filteredGenre: req.query.genres, searchQuery: req.query.search, prevPage, nextPage })
 }

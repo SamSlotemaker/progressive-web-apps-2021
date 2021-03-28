@@ -218,59 +218,25 @@ main>section:nth-of-type(2) form>input:checked+label {
     transform: scale(1.02) translateY(-10px);
 }
 
-/* PLATFORMS */
-.platforms {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+.page-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.page-button {
+    margin: 1em 0em;
+    display: inline-block;
+    cursor: pointer;
+    background-color: rgb(71, 71, 71);
     color: white;
+    padding: .8em;
 }
 
-.platform {
-    position: relative;
-    width: 100%;
-    height: 300px;
+.next-button {
+    margin-left: auto;
 }
 
-.platform img {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.platform .overlay {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    z-index: 3;
-}
-
-.platform .image-overlay {
-    z-index: 2;
-    opacity: .75;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: black;
-    display: block;
-}
-
-.platform h3 {
-    font-weight: 300;
-    display: flex;
-    align-items: center;
-}
-
-.platform h3 span {
-    margin-left: .25em;
-    font-weight: bold;
-    font-size: 1.5em;
-}
-
+.prev-button {}
 
 /* DETAILS */
 .game-details {
@@ -382,6 +348,11 @@ main>section:nth-of-type(2) form>input:checked+label {
     font-size: 1.5em;
     color: white;
     border: none;
+    margin: 1em 0em;
+}
+
+.cache-links {
+    display: block;
     margin: 1em 0em;
 }
 
