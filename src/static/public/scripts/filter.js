@@ -8,19 +8,20 @@ radios.forEach(radio => {
         renderGameList(gameList, e.target.value)
     })
 })
-//fetch data from backend
-getData('/gamesJSON').then(result => {
-    gameList = result
-})
+
 //render gameList into html
 function renderGameList(gameList, value) {
-    const filteredList = filterOnGenre(gameList, value)
-    const gameArticles = createGameList(filteredList)
-    gamesSection.innerHTML = ''
-    gameArticles.forEach(article => {
-        gamesSection.insertAdjacentHTML('beforeend', article)
-    })
+    //fetch data from backend
+    getData('/gamesJSON').then(result => {
+        gameList = result
 
+        const filteredList = filterOnGenre(gameList, value)
+        const gameArticles = createGameList(filteredList)
+        gamesSection.innerHTML = ''
+        gameArticles.forEach(article => {
+            gamesSection.insertAdjacentHTML('beforeend', article)
+        })
+    })
 }
 //filters given array on given genre
 function filterOnGenre(array, genre) {
