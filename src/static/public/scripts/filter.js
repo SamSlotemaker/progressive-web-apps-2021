@@ -11,7 +11,6 @@ radios.forEach(radio => {
 //fetch data from backend
 getData('/gamesJSON').then(result => {
     gameList = result
-    console.log(gameList)
 })
 //render gameList into html
 function renderGameList(gameList, value) {
