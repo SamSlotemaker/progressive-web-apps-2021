@@ -8,17 +8,52 @@ This is the repo for the HvA Web Development Minor course: Progressive web apps
 * [Concept](#Concept)
 * [Installation](#Concept)
 * [External Data](#External_Data)
-* [Sources](#Sources)
 
 ## Live Demo
 Visit the live demo [Here](https://gamepicker-pwa.herokuapp.com/)
 
 ## :book:Description
-A concept web app, to learn the difference between client- and serverside rendering
+A progressive Web App, base on the most popular games.
 
 ## :pencil:Concept
-Collecting certain games and platforms from the external API, then showing them in an overview and detailpage, where users are able to collect extra information on popular games. 
-Users need to be able to filter games on certain properties, i.e. genre. And they need to be able to favorite games so that they can find them later on. 
+Collecting certain games from the external API, then showing them in an overview and detailpage, where users are able to collect extra information on popular games. 
+Users need to be able to filter games on certain properties, i.e. genre.
+
+### Functionalities 
+#### Filtering: 
+Games can be filtered on thier genre
+Serverside: This can be handled by a filter query in the url: `/?genres=genreTitle`, which will be default at 'all'.
+Enhanced: Filtering can be handled client side, when javascript is enabled, by handeling the form onchange and rendering the gamelist clientside. 
+
+#### Searching 
+Users can search for games by typing the search query in the searchbar. 
+Serverside: This can be handled by the search query in the url: `/?search=searchQuery` 
+
+
+#### Paging
+Users can change the games page by clicking the next/previous buttons at the bottom of the list
+Serverside: This will be handled by the page query in the url: `/?page=pageNumber`, which will be default at 1
+
+#### Detailpage
+gamedetails can be accesed by clicking on games, which will reroute the user to the correct route, consisting of the user id. `/:id`
+
+### Caching
+Core assets will be cached by a service worker, making .css and .js files available offline. Every HTML request will be looked up in cached and served via cache when available, when not available it will be fetched and cached, making it available next time.
+
+#### Offline
+The app can be used offline, when the requested pages have been visited before. When a non-cached page is requested while offline, an offline page will be shown, with all the routes that can still be accessed. 
+
+### Optimalisations
+
+#### Compression
+Repsonse bodies will be compressed on the server by npm compression. 
+
+#### Minifying
+.js en .css files are minified to reduce filesize and loading time. 
+
+#### Changed concept
+Changed the concept to remove unnessecary platform list and added paging to reduce the amount of pictures on the page, creating a faster loading time for the initial page. 
+
 
 ### Code standards
 #### Modules
@@ -29,14 +64,6 @@ Camelcase, describe action and outcome.
 
 Functions that render: render'Component', i.e. `renderDetails`, `renderGameSection`
 Functions that return a Component: create'Component', i.e. `createGameList`, `createGenreFilter`
-
-
-### Actor diagram
-![actor-diagram 2](https://user-images.githubusercontent.com/60625329/109555063-61a8b080-7ad5-11eb-992c-4704f44a7e14.png)
-
-
-### Interaction diagram
-![interaction-diagram2](https://user-images.githubusercontent.com/60625329/109555051-5f465680-7ad5-11eb-83ba-e42c8ba97ed3.png)
 
 
 ## :gear:Installation
@@ -1010,12 +1037,3 @@ GET response
 }
 ```
 </details>
-
-## :heart:Sources
-https://rawg.io/
-http://projects.jga.me/routie/
-https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onhashchange
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
-https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
-https://codeburst.io/javascript-what-is-short-circuit-evaluation-ff22b2f5608c
